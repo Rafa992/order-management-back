@@ -6,10 +6,10 @@ import { LoginDto, RegisterDto } from './dto/auth.dto';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Post('login')
-
   async login(@Body() dto: LoginDto, @Res({passthrough: true}) res: Response){
     
     const result = await this.authService.login(dto)
@@ -20,7 +20,6 @@ export class AuthController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Post('register')
-
   async register(@Body() dto: RegisterDto, @Res({passthrough: true}) res: Response){
     const result = await this.authService.register(dto)
     const {refreshToken, ...response} = result
@@ -42,9 +41,7 @@ export class AuthController {
 
   @HttpCode(200)
   @Post('logout')
-
   async logout(@Res({passthrough: true}) res: Response){
-
     return true
   }
 }

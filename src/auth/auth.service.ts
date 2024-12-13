@@ -64,10 +64,10 @@ export class AuthService {
 
     private async validateUser(dto: LoginDto){
         const user = await this.userService.getByEmail(dto.email)
-        if(!user) throw new NotFoundException('User not found')
+        if(!user) throw new UnauthorizedException('Incorrect email or password')
 
         const isValid = await verify(user.password, dto.password)
-        if(!isValid) throw new UnauthorizedException('Invalid password')
+        if(!isValid) throw new UnauthorizedException('Incorrect email or password')
         return user
     }
 }
